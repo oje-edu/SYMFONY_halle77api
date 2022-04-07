@@ -1,0 +1,32 @@
+@import "~bootstrap/scss/bootstrap";
+:root {
+    --clr-purple: #9900cc;
+}
+body {
+    min-height: 100vh;
+    background-color: linen;
+    color: var(--clr-purple);
+
+    font-family: monospace;
+
+    h1 {
+        color: var(--clr-purple);
+    }
+
+    nav {
+        .navbar, .navbar-brand, {
+            color: var(--clr-purple);
+        }
+    }
+    .nav-link {
+        color: var(--clr-purple);
+    }
+
+    .table {
+        color: var(--clr-purple);
+    }
+
+    .list-group-item {
+        color: var(--clr-purple);
+    }
+}

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Benutzerliste{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Benutzer</th>
+                <th scope="col">Rolle</th>
+                <th scope="col"><a class="btn btn-sm btn-outline-info" href="{{ path('user_add') }}">Hinzufügen</a></th>
+            </tr>
+            </thead>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {% for role in user.roles %}
+                            {{ role }}
+                        {% endfor %}
+                    </td>
+                    <td style="">
+{#                        <ul class="list-group list-group-flush">#}
+{#                            {% for product in user.company.products %}#}
+{#                                <li class="list-group-item" style="background-color: linen">#}
+{#                                    {{ product.name }}#}
+{#                                    <div class ="btn-group-sm">#}
+{#                                        <a href="{{ path('product_edit', {'companyId': user.company.id, 'id': product.id}) }}" class="btn btn-warning">Bearbeiten</a>#}
+{#                                        <a href="{{ path('product_delete', {'id': product.id}) }}" class="btn btn-danger">Löschen</a>#}
+{#                                    </div>#}
+{#                                </li>#}
+{#                            {% endfor %}#}
+{#                        </ul>#}
+                    </td>
+                    <td>
+{#                        <div class="btn-group-sm">#}
+{#                            <a class="btn btn-success" href="{{ path('product_add', {'companyId': user.company.id}) }}">#}
+{#                                Hinzufügen#}
+{#                            </a>#}
+{#                        </div>#}
+{#                    </td>#}
+                    <td>
+                        <div class="btn-group-sm">
+                            <a class="btn btn-warning" href="{{ path('user_edit', {'id': user.id}) }}">
+                                Bearbeiten
+                            </a>
+                            <a class="btn btn-danger" href="{{ path('user_delete', {'id': user.id}) }}">
+                                Löschen
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}
