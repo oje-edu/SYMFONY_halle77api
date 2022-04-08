@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Episode Admin{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>Episoden Liste</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nr.</th>
+                <th>Titel</th>
+                <th>URL</th>
+                <th>Vorschaubild</th>
+                <th>
+                    <div class="d-flex justify-content-between">
+                        Aktion
+                        <div class="btn-group-sm">
+                            <a href="{{ path('episode_add') }}" class="btn btn-sm btn-outline-info">Hinzufügen</a>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for episode in episodes %}
+                <tr>
+                    <td>{{ episode.episodeNr }}</td>
+                    <td>{{ episode.title }}</td>
+                    <td>{{ episode.episodeUrl }}</td>
+                    <td>{{ episode.thumbnailUrl }}</td>
+                    <td>
+                        <div class="btn-group-sm">
+                            <a href="{{ path('episode_edit', {'id': episode.id}) }}" class="btn btn-sm btn-warning">Bearbeiten</a>
+                            <a href="{{ path('episode_delete', {'id': episode.id}) }}" class="btn btn-sm btn-outline-danger">Löschen</a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

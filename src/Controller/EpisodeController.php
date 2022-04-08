@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Plate;
-use App\Form\PlateType;
+use App\Entity\Episode;
+use App\Form\EpisodeType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class PlateController extends AbstractController
+class EpisodeController extends AbstractController
 {
     private EntityManagerInterface $em;
     private ValidatorInterface $validator;
@@ -27,47 +27,44 @@ class PlateController extends AbstractController
         $this->validator = $validator;
 
     }
-    #[Route('/api/plates', name: 'plate_api', methods: ['GET'])]
+    #[Route('/api/episodes', name: 'episode_api', methods: ['GET'])]
     public function api(): Response
     {
-        $plates = $this->em->getRepository(Plate::class)->findAll();
-
-        if(!$plates) {
+        $episodes = $this->em->getRepository(Episode::class)->findAll();
+        if(!$episodes) {
             return $this->json(['success' => false], 400);
         }
 
         $data = [
             'success' => true,
-            'plates' => $plates,
+            'episodes' => $episodes,
         ];
 
         return $this->json($data);
     }
 
-    #[Route('/plates/list', name: 'plate_list')]
+    #[Route('/episodes/list', name: 'episode_list')]
     #[IsGranted('ROLE_ADMIN')]
-    public function list(): Response
+    public function index(): Response
     {
-        return $this->render('plate/list.html.twig', [
-
-            'plates' => $this->em->getRepository(Plate::class)->findAll(),
+        return $this->render('episode/list.html.twig', [
+            'episodes' => $this->em->getRepository(Episode::class)->findAll(),
         ]);
     }
 
-    #[Route('/plate/add', name: 'plate_add')]
+    #[Route('/episode/add', name: 'episode_add')]
     #[IsGranted('ROLE_ADMIN')]
     public function add(Request $request): Response
     {
-        $plate = new Plate();
-        $form = $this->createForm(PlateType::class, $plate);
+        $episode = new Episode();
+        $form = $this->createForm(EpisodeType::class, $episode);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
+            $episode = $form->getData();
 
-            $plate =$form->getData();
-
-            $error = $this->validator->validate($plate);
+            $error = $this->validator->validate($episode);
 
             if(count($error) > 0) {
                 $errorMessages = [];
@@ -78,56 +75,52 @@ class PlateController extends AbstractController
                 return $this->json(['success' => false, 'errors' => $errorMessages],  400);
             }
 
-            $this->em->persist($plate);
+            $this->em->persist($episode);
 
             $this->em->flush();
 
-            return $this->redirectToRoute('plate_list');
+            return $this->redirectToRoute('episode_list');
         }
 
-        return $this->render('plate/add.html.twig', [
+        return $this->render('episode/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/plate/edit/{id}', name: 'plate_edit')]
+    #[Route('/episode/edit/{id}', name: 'episode_edit')]
     #[IsGranted('ROLE_ADMIN')]
     public function edit($id, Request $request): Response
     {
-        $plate = $this->em->getRepository(Plate::class)->find($id);
-        $form = $this->createForm(PlateType::class, $plate);
+        $episode = $this->em->getRepository(Episode::class)->find($id);
+        $form = $this->createForm(EpisodeType::class, $episode);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $plate->setKz($form->get('kz')->getData())
-                ->setName($form->get('name')->getData())
-                ->setLat($form->get('lat')->getData())
-                ->setLng($form->get('lng')->getData());
+            $episode
+                ->setEpisodeNr($form->get('episodenr')->getData())
+                ->setTitle($form->get('title')->getData())
+                ->setEpisodeUrl($form->get('episodeUrl')->getData())
+                ->setThumbnailUrl($form->get('thumbnailUrl')->getData());
 
             $this->em->flush();
 
-            return $this->redirectToRoute('plate_list');
+            return $this->redirectToRoute('episode_list');
         }
-        return $this->render('plate/edit.html.twig', [
-            'form' => $form->createView(),
+
+        return $this->render('episode/edit.html.twig', [
+           'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/plate/delete/{id}', name: 'plate_delete')]
+    #[Route('/episode/delete/{id}', name: 'episode_delete')]
     #[IsGranted('ROLE_ADMIN')]
     public function delete($id): Response
     {
-        $plate = $this->em->getRepository(Plate::class)->find($id);
-        $this->em->remove($plate);
+        $episode = $this->em->getRepository(Episode::class)->find($id);
+        $this->em->remove($episode);
         $this->em->flush();
 
-        return $this->redirectToRoute('plate_list');
+        return $this->redirectToRoute('episode_list');
     }
-
-//    #[Route('/plates/search/{kz}', name: 'plate_search')]
-//    public function search($kz): Response
-//    {
-//
-//    }
 }

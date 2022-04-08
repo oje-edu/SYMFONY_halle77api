@@ -3,43 +3,42 @@
 {% block title %}Kennzeichen Admin{% endblock %}
 
 {% block body %}
-        <div class="container">
-            <h1>Kennzeichen Liste</h1>
-            <table class="table">
-                <thead>
+    <div class="container">
+        <h1>Kennzeichen Liste</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>KZ</th>
+                <th>Stadt/Landkreis</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>
+                    <div class="d-flex justify-content-between">
+                    Aktion
+                    <div class="btn-group-sm">
+                        <a href="{{ path('plate_add') }}" class="btn btn-sm btn-outline-info">Hinzufügen</a>
+                    </div>
+                    </div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for plate in plates %}
                 <tr>
-                    <th>KZ</th>
-                    <th>Stadt/Landkreis</th>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
-                    <th>
-                        <div class="d-flex justify-content-between">
-                        Aktion
+                    <td>{{ plate.kz }}</td>
+                    <td>{{ plate.name }}</td>
+                    <td>{{ plate.lat }}</td>
+                    <td>{{ plate.lng }}</td>
+                    <td>
                         <div class="btn-group-sm">
-                            <a href="{{ path('plate_add') }}" class="btn btn-sm btn-outline-info">Hinzufügen</a>
+                            <a href="{{ path('plate_edit', {'id': plate.id}) }}" class="btn btn-sm btn-warning">Bearbeiten</a>
+                            <a href="{{ path('plate_delete', {'id': plate.id}) }}" class="btn btn-sm btn-outline-danger">Löschen</a>
                         </div>
-                        </div>
-                    </th>
+                    </td>
                 </tr>
-                </thead>
-                <tbody>
-                {% for plate in plates %}
-                    <tr>
-                        <td>{{ plate.kz }}</td>
-                        <td>{{ plate.name }}</td>
-                        <td>{{ plate.lat }}</td>
-                        <td>{{ plate.lng }}</td>
-                        <td>
-                            <div class="btn-group-sm">
-                                <a href="{{ path('plate_edit', {'id': plate.id}) }}" class="btn btn-sm btn-warning">Bearbeiten</a>
-                                <a href="{{ path('plate_delete', {'id': plate.id}) }}" class="btn btn-sm btn-outline-danger">Löschen</a>
-                            </div>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 
 {% endblock %}

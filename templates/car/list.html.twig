@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messungen Admin{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>Autos Liste</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Episode</th>
+                <th>Nr.</th>
+                <th>Marke</th>
+                <th>Modell</th>
+                <th>Hubraum</th>
+                <th>PS</th>
+                <th>KM</th>
+                <th>BJ</th>
+                <th>1.Messung</th>
+                <th>2.Messung</th>
+                <th>Bemerkung</th>
+                <th>
+                    <div class="d-flex justify-content-between">
+                        Aktion
+                        <div class="btn-group-sm">
+                            <a href="{{ path('car_add') }}" class="btn btn-sm btn-outline-info">Hinzufügen</a>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for car in cars %}
+                <tr>
+                    <td>{{ car.id }}</td>
+                    <td>{{ car.episode.id }}</td>
+                    <td>{{ car.carNr }}</td>
+                    <td>{{ car.brand }}</td>
+                    <td>{{ car.type }}</td>
+                    <td>{{ car.ccm }}</td>
+                    <td>{{ car.hp }}</td>
+                    <td>{{ car.km }}</td>
+                    <td>{{ car.year }}</td>
+                    <td>{{ car.ps1 }}</td>
+                    <td>{{ car.ps2 }}</td>
+                    <td>{{ car.comment }}</td>
+                    <td>
+                        <div class="btn-group-sm">
+                            <a href="{{ path('car_edit', {'id': car.id}) }}" class="btn btn-sm btn-warning">Bearbeiten</a>
+                            <a href="{{ path('car_delete', {'id': car.id}) }}" class="btn btn-sm btn-outline-danger">Löschen</a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
