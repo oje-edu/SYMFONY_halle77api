@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Car;
 use App\Entity\Episode;
+use App\Repository\EpisodeRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -15,6 +16,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CarType extends AbstractType
 {
+    private $episodeRepository;
+    public function __construct(EpisodeRepository $episodeRepository)
+    {
+        $this->episodeRepository = $episodeRepository;
+    }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -24,6 +30,7 @@ class CarType extends AbstractType
         $builder
             ->add('episodeNr', EntityType::class, [
                 'class' => Episode::class,
+                'choices' => $this->episodeRepository->descEpisodeNr(),
                 'multiple' => false,
                 'expanded' => false,
                 'label' => 'Episoden-Nr',

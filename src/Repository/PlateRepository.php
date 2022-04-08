@@ -45,6 +45,18 @@ class PlateRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Plate[]
+     */
+    public function descPlateKz()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('e.kz', 'DESC')
+            ->getQuery()
+            ->execute()
+            ;
+    }
+
     // /**
     //  * @return Plate[] Returns an array of Plate objects
     //  */

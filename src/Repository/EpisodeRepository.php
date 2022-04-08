@@ -45,6 +45,18 @@ class EpisodeRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Episode[]
+     */
+    public function descEpisodeNr()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.episodeNr', 'DESC')
+            ->getQuery()
+            ->execute()
+            ;
+    }
+
     // /**
     //  * @return Episode[] Returns an array of Episode objects
     //  */
