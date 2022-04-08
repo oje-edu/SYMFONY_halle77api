@@ -1,32 +1,89 @@
 @import "~bootstrap/scss/bootstrap";
 :root {
+    --h77base: #e4cc9c;
+    --h77secbase: #de6e4a;
+    --h77bg: #6eb8b3;
     --clr-purple: #9900cc;
+    --clr-white: white
 }
 body {
     min-height: 100vh;
-    background-color: linen;
-    color: var(--clr-purple);
+    background-color: var(--h77bg);
+    color: var(--h77base);
 
     font-family: monospace;
 
     h1 {
-        color: var(--clr-purple);
+        color: var(--h77base);
     }
 
     nav {
         .navbar, .navbar-brand, {
-            color: var(--clr-purple);
+            color: var(--h77base);
+            &:hover {
+                color: var(--h77secbase);
+            }
         }
     }
     .nav-link {
-        color: var(--clr-purple);
+        color: var(--h77base);
+        &:hover {
+            color: var(--h77secbase);
+        }
     }
 
     .table {
-        color: var(--clr-purple);
+        color: var(--clr-white);
     }
 
     .list-group-item {
-        color: var(--clr-purple);
+        color: var(--clr-white);
     }
+
+    .btn-h77base {
+        color: var(--h77base);
+        border-color: var(--btn-h77base);
+        &:hover {
+            color: var(--h77bg);
+            background-color: var(--h77base);
+            border-color: var(--btn-h77base);
+        }
+    }
+
+    thead, tbody, tfoot, tr, td, th {
+        border-style: none;
+    }
+
+    td {
+        code {
+            font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+            background-color: lavender;
+            padding: 6px;
+        }
+    }
+}
+
+/* Firefox */
+* {
+    scrollbar-color: var(--h77base) var(--h77bg);
+    scrollbar-width: thin;
+}
+
+/* WebKit / Blink */
+::-webkit-scrollbar {
+    width: 0.5em !important;
+    height: 0.5em !important;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--h77bg) !important;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 0.375em !important;
+    background: var(--h77base) !important;
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--h77base) !important;
 }

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% set domain = app.request.getSchemeAndHttpHost() %}
+{% set home_api = path('home_api')%}
 {% set plate_api = path('plate_api')%}
 {% set episode_api = path('episode_api')%}
 {% set car_api = path('car_api')%}
@@ -13,38 +14,26 @@
 <div class="d-flex flex-column justify-content-center align-items-center" style="min-height: 80vh">
     <h1>Die API Endpunkte</h1>
     <div class="container">
-        <ul class="list-unstyled">
-            <li>
-                <div class="d-flex justify-content-around">
-                    <div>
-                        <code>{{ domain ~ plate_api }}</code>
-                    </div>
-                    <div class="btn-group">
-                        <a href="{{ path('plate_api') }}" class="btn btn-sm btn-outline-info">kennzeichen</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="d-flex justify-content-around">
-                    <div>
-                        <code>{{ domain ~ episode_api }}</code>
-                    </div>
-                    <div class="btn-group">
-                        <a href="{{ path('episode_api') }}" class="btn btn-sm btn-outline-info">episoden</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="d-flex justify-content-around">
-                    <div>
-                        <code>{{ domain ~ car_api }}</code>
-                    </div>
-                    <div class="btn-group">
-                        <a href="{{ path('car_api') }}" class="btn btn-sm btn-outline-info">messungen</a>
-                    </div>
-                </div>
-            </li>
-        </ul>
+        <table class="table d-flex justify-content-center">
+            <tbody>
+            <tr>
+                <td><a href="{{ path('home_api') }}" class="btn btn-sm btn-h77base" style="width: 250px">all</a></td>
+                <td><code>{{ domain ~ home_api }}</code></td>
+            </tr>
+            <tr>
+                <td><a href="{{ path('plate_api') }}" class="btn btn-sm btn-h77base" style="width: 250px">kennzeichen</a></td>
+                <td><code>{{ domain ~ plate_api }}</code></td>
+            </tr>
+            <tr>
+                <td><a href="{{ path('episode_api') }}" class="btn btn-sm btn-h77base" style="width: 250px">episoden</a></td>
+                <td><code>{{ domain ~ episode_api }}</code></td>
+            </tr>
+            <tr>
+                <td><a href="{{ path('car_api') }}" class="btn btn-sm btn-h77base" style="width: 250px">messungen</a></td>
+                <td><code>{{ domain ~ car_api }}</code></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}
