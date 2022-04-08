@@ -99,8 +99,8 @@ class CarController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $car
-                ->setEpisode($form->get('episodenr')->getData())
-                ->setNr($form->get('nr')->getData())
+                ->setEpisodeNr($form->get('episodeNr')->getData())
+                ->setCarNr($form->get('carNr')->getData())
                 ->setBrand($form->get('brand')->getData())
                 ->setType($form->get('type')->getData())
                 ->setCcm($form->get('ccm')->getData())

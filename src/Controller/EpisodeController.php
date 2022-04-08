@@ -98,7 +98,7 @@ class EpisodeController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $episode
-                ->setEpisodeNr($form->get('episodenr')->getData())
+                ->setEpisodeNr($form->get('episodeNr')->getData())
                 ->setTitle($form->get('title')->getData())
                 ->setEpisodeUrl($form->get('episodeUrl')->getData())
                 ->setThumbnailUrl($form->get('thumbnailUrl')->getData());
