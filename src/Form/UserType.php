@@ -40,7 +40,7 @@ class UserType extends AbstractType
                 'label' => 'Passwort',
             ])
             ->add('Roles', ChoiceType::class, [
-                'required' => true,
+                'required' => false,
                 'multiple' => false,
                 'expanded' => false,
                 'choices' => [
