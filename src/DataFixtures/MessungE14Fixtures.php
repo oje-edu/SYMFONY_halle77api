@@ -137,7 +137,7 @@ class MessungE14Fixtures extends Fixture
         $manager->persist($e14m12);
 
         $e14m13 = (new Car())
-            ->setCarNr(12)
+            ->setCarNr(13)
             ->setEpisodeNr($this->getReference('episode14'))
             ->setBrand('Audi')
             ->setType('A4')
@@ -148,7 +148,7 @@ class MessungE14Fixtures extends Fixture
         $manager->persist($e14m13);
 
         $e14m14 = (new Car())
-            ->setCarNr(13)
+            ->setCarNr(14)
             ->setEpisodeNr($this->getReference('episode14'))
             ->setBrand('BMW')
             ->setType('(E91) 330i')
@@ -159,7 +159,7 @@ class MessungE14Fixtures extends Fixture
         $manager->persist($e14m14);
 
         $e14m15 = (new Car())
-            ->setCarNr(14)
+            ->setCarNr(15)
             ->setEpisodeNr($this->getReference('episode14'))
             ->setBrand('BMW')
             ->setType('(E46) 323i')
@@ -171,7 +171,7 @@ class MessungE14Fixtures extends Fixture
         $manager->persist($e14m15);
 
         $e14m16 = (new Car())
-            ->setCarNr(15)
+            ->setCarNr(16)
             ->setEpisodeNr($this->getReference('episode14'))
             ->setBrand('Ford')
             ->setType('Fiesta')
