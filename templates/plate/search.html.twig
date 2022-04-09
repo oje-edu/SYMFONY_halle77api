@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kennzeichen Suchen{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <form class="d-flex" method="POST">
+            <input name="kz" class="form-control me-2" type="search" placeholder="KZ Eingeben" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Suchen</button>
+        </form>
+        <h1>Kennzeichen Liste</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>KZ</th>
+                <th>Stadt/Landkreis</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                <th>
+                    <div class="d-flex justify-content-between">
+                        Aktion
+                        <div class="btn-group-sm">
+                            <a href="{{ path('plate_add') }}" class="btn btn-sm btn-light">Hinzufügen</a>
+                        </div>
+                    </div>
+                </th>
+                {% endif %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for plate in plates %}
+                <tr>
+                    <td>{{ plate.kz }}</td>
+                    <td>{{ plate.name }}</td>
+                    <td>{{ plate.lat }}</td>
+                    <td>{{ plate.lng }}</td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <td>
+                        <div class="btn-group-sm">
+                            <a href="{{ path('plate_edit', {'id': plate.id}) }}" class="btn btn-sm btn-warning">Bearbeiten</a>
+                            <a href="{{ path('plate_delete', {'id': plate.id}) }}" class="btn btn-sm btn-outline-danger">Löschen</a>
+                        </div>
+                    </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+

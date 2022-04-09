@@ -125,9 +125,18 @@ class PlateController extends AbstractController
         return $this->redirectToRoute('plate_list');
     }
 
-//    #[Route('/plates/search/{kz}', name: 'plate_search')]
-//    public function search($kz): Response
-//    {
-//
-//    }
+    #[Route('/plates/search', name: 'plate_search')]
+    public function search(Request $request): Response
+    {
+        $plates = $this->em->getRepository(Plate::class)->findAll();
+
+        if($request->isMethod('POST'))
+        {
+            $kz = $request->get('kz');
+            $plates = $this->em->getRepository(Plate::class)->findBy(['kz' => $kz]);
+        }
+        return $this->render('plate/search.html.twig', [
+            'plates' => $plates,
+        ]);
+    }
 }
