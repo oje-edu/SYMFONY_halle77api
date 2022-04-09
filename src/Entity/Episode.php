@@ -126,7 +126,7 @@ class Episode implements \JsonSerializable
     {
         if ($this->car->removeElement($car)) {
             // set the owning side to null (unless already changed)
-            if ($car->getEpisode() === $this) {
+            if ($car->getEpisodeNr() === $this) {
                 $car->setEpisodeNr(null);
             }
         }

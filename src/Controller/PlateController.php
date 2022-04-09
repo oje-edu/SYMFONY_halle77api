@@ -44,6 +44,7 @@ class PlateController extends AbstractController
         return $this->json($data);
     }
 
+
     #[Route('/plates/list', name: 'plate_list')]
     #[IsGranted('ROLE_ADMIN')]
     public function list(): Response
