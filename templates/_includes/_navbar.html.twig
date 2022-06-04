@@ -49,6 +49,15 @@
                             <li><a class="dropdown-item" href="{{ path('app_logout') }}">Abmelden</a></li>
                         </ul>
                     </li>
+                    {% else %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Login
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ path('app_login') }}">Anmelden</a></li>
+                        </ul>
+                    </li>
                     {% endif %}
                 </ul>
             </div>

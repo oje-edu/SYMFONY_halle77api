@@ -60,7 +60,9 @@ class AdminController extends AbstractController
             $user->setEmail($form->get('email')->getData());
 
             $plainText = $form->get('password')->getData();
+
             $user->setPassword($this->passwordHasher->hashPassword($user, $plainText));
+
 
             $this->em->flush();
 
